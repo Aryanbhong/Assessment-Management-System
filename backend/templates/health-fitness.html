@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{assessmentName}} Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .meta-info {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meta-info .session-id {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .meta-info .generated-date {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+            padding: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .fields-grid {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .field-card {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .field-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .field-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .field-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .field-classification {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .excellent {
+            background-color: #c6f6d5;
+            color: #22543d;
+            border-left-color: #22c55e;
+        }
+
+        .good {
+            background-color: #bee3f8;
+            color: #2c5282;
+            border-left-color: #3b82f6;
+        }
+
+        .average {
+            background-color: #fef3c7;
+            color: #92400e;
+            border-left-color: #f59e0b;
+        }
+
+        .poor {
+            background-color: #fecaca;
+            color: #991b1b;
+            border-left-color: #ef4444;
+        }
+
+        .unknown {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            border-left-color: #6b7280;
+        }
+
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .report-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .report-summary h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .report-summary p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        @media print {
+            body { 
+                background-color: white; 
+            }
+            
+            .section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            
+            .field-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{assessmentName}}</h1>
+        <div class="subtitle">Comprehensive Health Analysis Report</div>
+    </div>
+
+    <div class="meta-info">
+        <div class="session-id">Session ID: {{sessionId}}</div>
+        <div class="generated-date">Generated: {{generatedAt}}</div>
+    </div>
+
+    <div class="report-summary">
+        <h2>Assessment Overview</h2>
+        <p>This comprehensive health and fitness assessment provides detailed insights into your physical condition, cardiovascular health, and overall wellness. Each metric has been analyzed and classified to help you understand your current health status and areas for improvement.</p>
+    </div>
+
+    {{sections}}
+
+    <div class="footer">
+        <p><strong>Assessment Report System</strong></p>
+        <p>This report is generated automatically based on your assessment data.</p>
+        <p>Please consult with healthcare professionals for medical advice.</p>
+    </div>
+</body>
+</html>
