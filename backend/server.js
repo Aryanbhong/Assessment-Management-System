@@ -16,8 +16,8 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-domain.com'] 
-    : ['http://localhost:5173'],
+    ? ['https://assessment-management-system-nine.vercel.app/'] 
+    : ['https://assessment-management-system-nine.vercel.app/'],
   credentials: true
 }));
 
@@ -88,19 +88,13 @@ app.use((err, req, res, next) => {
   }
 });
 
-// 404 handler
-// app.use('*', (req, res) => {
-//   res.status(404).json({ 
-//     error: 'Route not found',
-//     message: `Cannot ${req.method} ${req.originalUrl}`
-//   });
-// });
+
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`📁 Reports directory: ${path.join(__dirname, 'generated-reports')}`);
-  console.log(`🛠️  Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Health check: http://localhost:${PORT}/api/health`);
+  console.log(`Reports directory: ${path.join(__dirname, 'generated-reports')}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
 module.exports = app;
