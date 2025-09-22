@@ -12,11 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-
-    "@sparticuz/chromium": "^138.0.2",
-
-
-    "assesment-management-system": "file:..",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -24,11 +19,8 @@
     "express-rate-limit": "^8.1.0",
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
-    "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.10",
-    "npm": "^11.6.0",
-"puppeteer": "^24.22.0",
-
+    "puppeteer": "^24.22.0"
   }
 }
