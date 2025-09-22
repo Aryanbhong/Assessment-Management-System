@@ -1,19 +1,18 @@
-// backend/routes/auth.js
+
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 const { findUserByEmail, createUser } = require('../data/users');
 const { generateToken, authenticateToken } = require('../middleware/auth');
-// const { validateRegistration, validateLogin } = require('../middleware/validation');
+
 const{validateRegistration , validateLogin} = require('../middleware/validation');
-// console.log(validateLogin,validateRegistration)
-// // POST /api/auth/register
+
 router.post('/register', validateRegistration, async (req, res) => {
   try {
     const { email, password, name } = req.body;
 
-    // Check if user already exists
+
     const existingUser = findUserByEmail(email);
     if (existingUser) {
       return res.status(409).json({
@@ -22,21 +21,19 @@ router.post('/register', validateRegistration, async (req, res) => {
       });
     }
 
-    // Hash password
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Create user
+   
     const newUser = createUser({
       email,
       password: hashedPassword,
       name
     });
 
-    // Generate token
     const token = generateToken(newUser);
 
-    // Remove password from response
+   
     const { password: _, ...userResponse } = newUser;
 
     res.status(201).json({
@@ -54,12 +51,11 @@ router.post('/register', validateRegistration, async (req, res) => {
   }
 });
 
-// POST /api/auth/login
+
 router.post('/login', validateLogin, async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Find user
     const user = findUserByEmail(email);
     if (!user) {
       return res.status(401).json({
@@ -68,7 +64,7 @@ router.post('/login', validateLogin, async (req, res) => {
       });
     }
 
-    // Verify password
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -77,10 +73,10 @@ router.post('/login', validateLogin, async (req, res) => {
       });
     }
 
-    // Generate token
+ 
     const token = generateToken(user);
 
-    // Remove password from response
+   
     const { password: _, ...userResponse } = user;
 
     res.json({
@@ -98,7 +94,6 @@ router.post('/login', validateLogin, async (req, res) => {
   }
 });
 
-// GET /api/auth/profile
 router.get('/profile', authenticateToken, (req, res) => {
   res.json({
     message: 'Profile retrieved successfully',
@@ -106,7 +101,7 @@ router.get('/profile', authenticateToken, (req, res) => {
   });
 });
 
-// POST /api/auth/verify
+
 router.post('/verify', authenticateToken, (req, res) => {
   res.json({
     message: 'Token is valid',

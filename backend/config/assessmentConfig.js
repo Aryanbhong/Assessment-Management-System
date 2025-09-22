@@ -1,4 +1,4 @@
-// backend/config/assessmentConfig.js
+
 
 const assessmentConfigurations = {
   "as_hr_02": {
@@ -354,78 +354,6 @@ const assessmentConfigurations = {
     ]
   }
 };
-
-// // Helper function to extract value using JSONPath-like syntax
-// function extractValue(data, path) {
-//   try {
-//     // Handle array queries like exercises[?(@.id==235)].setList[0].time
-//     if (path.includes('[?(@.')) {
-//       const parts = path.split('[?(@.');
-//       const basePath = parts[0];
-//       const condition = parts[1].split(')').shift();
-//       const remainingPath = parts[1].split(').')[1];
-      
-//       const baseData = getNestedValue(data, basePath);
-//       if (!Array.isArray(baseData)) return null;
-      
-//       const [field, value] = condition.split('==');
-//       const filteredItem = baseData.find(item => 
-//         item[field] == value.replace(/"/g, '')
-//       );
-      
-//       if (!filteredItem) return null;
-//       return getNestedValue(filteredItem, remainingPath);
-//     }
-    
-//     // Handle regular dot notation
-//     return getNestedValue(data, path);
-//   } catch (error) {
-//     console.error(`Error extracting value for path ${path}:`, error);
-//     return null;
-//   }
-// }
-
-// // Helper function to get nested object value
-// function getNestedValue(obj, path) {
-//   return path.split('.').reduce((current, key) => {
-//     if (current && current.hasOwnProperty(key)) {
-//       return current[key];
-//     }
-//     return null;
-//   }, obj);
-// // }
-// function extractValue(data, path) {
-//   try {
-//     if (!path) return '';
-
-//     // Handle array queries like exercises[?(@.id==235)].setList[0].time
-//     if (path.includes('[?(@.')) {
-//       const parts = path.split('[?(@.');
-//       const basePath = parts[0];
-//       const condition = parts[1].split(')').shift();
-//       const remainingPath = parts[1].split(').')[1];
-
-//       const baseData = getNestedValue(data, basePath);
-//       if (!Array.isArray(baseData)) return '';
-
-//       const [field, value] = condition.split('==');
-//       const filteredItem = baseData.find(item =>
-//         String(item[field]) === value.replace(/"/g, '')
-//       );
-
-//       if (!filteredItem) return '';
-//       const val = getNestedValue(filteredItem, remainingPath);
-//       return val != null ? String(val) : '';
-//     }
-
-//     // Handle regular dot notation
-//     const val = getNestedValue(data, path);
-//     return val != null ? String(val) : '';
-//   } catch (error) {
-//     console.warn(`Error extracting value for path ${path}:`, error.message);
-//     return '';
-//   }
-// }
 
 
 function extractValue(data, path) {

@@ -1,5 +1,4 @@
-// backend/data/users.js
-// In-memory user storage (replace with database in production)
+
 let users = [
   {
     id: '1',
@@ -35,12 +34,7 @@ const getAllUsers = () => {
   });
 };
 
-// module.exports = {
-//   findUserByEmail,
-//   findUserById,
-//   createUser,
-//   getAllUsers
-// };
+
 
 module.exports ={
     findUserByEmail,

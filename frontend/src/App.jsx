@@ -2,7 +2,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { isAuthenticated } from './utils/auth';
-
 // Components
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';

@@ -1,4 +1,4 @@
-// backend/routes/reports.js
+
 const express = require('express');
 const path = require('path');
 const router = express.Router();
@@ -7,7 +7,7 @@ const { authenticateToken } = require('../middleware/auth');
 const { validateSessionId, validateReportRequest } = require('../middleware/validation');
 const { getReportService } = require('../services/reportService');
 
-// GET /api/reports/sessions - Get available sessions for testing
+
 router.get('/sessions', authenticateToken, (req, res) => {
   try {
     const reportService = getReportService();
@@ -27,7 +27,7 @@ router.get('/sessions', authenticateToken, (req, res) => {
   }
 });
 
-// POST /api/reports/generate - Generate PDF report
+
 router.post('/generate', authenticateToken, validateReportRequest, async (req, res) => {
   try {
     const { session_id } = req.body;
@@ -60,7 +60,7 @@ router.post('/generate', authenticateToken, validateReportRequest, async (req, r
   }
 });
 
-// GET /api/reports/generate/:sessionId - Alternative GET endpoint for report generation
+
 router.get('/generate/:sessionId', authenticateToken, validateSessionId, async (req, res) => {
   try {
     const { sessionId } = req.params;
@@ -93,7 +93,7 @@ router.get('/generate/:sessionId', authenticateToken, validateSessionId, async (
   }
 });
 
-// GET /api/reports/list - Get list of generated reports
+
 router.get('/list', authenticateToken, (req, res) => {
   try {
     const reportService = getReportService();
@@ -113,13 +113,12 @@ router.get('/list', authenticateToken, (req, res) => {
   }
 });
 
-// GET /api/reports/download/:filename - Download a generated report
 router.get('/download/:filename', authenticateToken, (req, res) => {
   try {
     const { filename } = req.params;
     const reportService = getReportService();
     
-    // Validate filename (security check)
+  
     if (!filename.match(/^[\w\-_\.]+\.pdf$/)) {
       return res.status(400).json({
         error: 'Invalid filename',
@@ -152,13 +151,13 @@ router.get('/download/:filename', authenticateToken, (req, res) => {
   }
 });
 
-// DELETE /api/reports/:filename - Delete a generated report
+
 router.delete('/:filename', authenticateToken, (req, res) => {
   try {
     const { filename } = req.params;
     const reportService = getReportService();
     
-    // Validate filename (security check)
+    
     if (!filename.match(/^[\w\-_\.]+\.pdf$/)) {
       return res.status(400).json({
         error: 'Invalid filename',
@@ -190,7 +189,7 @@ router.delete('/:filename', authenticateToken, (req, res) => {
   }
 });
 
-// GET /api/reports/config/:assessmentId - Get configuration for an assessment type
+
 router.get('/config/:assessmentId', authenticateToken, (req, res) => {
   try {
     const { assessmentId } = req.params;
