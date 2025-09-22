@@ -19,7 +19,6 @@
     "assesment-management-system": "file:..",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
-    "chrome-aws-lambda": "^10.1.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
