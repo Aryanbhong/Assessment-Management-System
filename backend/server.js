@@ -14,10 +14,16 @@ const PORT = process.env.PORT || 5000;
 
 // Security middleware
 app.use(helmet());
+// app.use(cors({
+//   origin: process.env.NODE_ENV === 'production' 
+//     ? ['https://assessment-management-system-nine.vercel.app/'] 
+//     : ['https://assessment-management-system-nine.vercel.app/'],
+//   credentials: true
+// }));
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://assessment-management-system-nine.vercel.app/'] 
-    : ['https://assessment-management-system-nine.vercel.app/'],
+  origin: ["https://assessment-management-system-nine.vercel.app"], // your frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
