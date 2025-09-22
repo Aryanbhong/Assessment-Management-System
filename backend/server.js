@@ -22,7 +22,7 @@ app.use(helmet());
 // }));
 
 app.use(cors({
-  origin: ["https://assessment-management-system-nine.vercel.app"], // your frontend domain
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
