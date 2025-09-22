@@ -225,7 +225,6 @@ class PDFGenerator {
 }
 
 let pdfGeneratorInstance = null;
-
 const getPDFGenerator = () => {
   if (!pdfGeneratorInstance) {
     pdfGeneratorInstance = new PDFGenerator();

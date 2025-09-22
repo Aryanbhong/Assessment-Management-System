@@ -12,10 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "@sparticuz/chromium": "^138.0.2",
+=======
+>>>>>>> d341b1cda0bea15d638250080515310b5fdfc6e7
     "assesment-management-system": "file:..",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
+    "chrome-aws-lambda": "^10.1.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
@@ -25,6 +29,10 @@
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.10",
     "npm": "^11.6.0",
+<<<<<<< HEAD
+=======
+    "puppeteer": "^24.22.0",
+>>>>>>> d341b1cda0bea15d638250080515310b5fdfc6e7
     "puppeteer-core": "^24.22.0"
   }
 }
