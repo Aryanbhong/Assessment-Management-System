@@ -1,7 +1,7 @@
-// backend/middleware/validation.js
+
 const { body, param, validationResult } = require('express-validator');
 
-// Helper function to handle validation results
+
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -17,7 +17,7 @@ const handleValidationErrors = (req, res, next) => {
   next();
 };
 
-// User registration validation
+
 const validateRegistration = [
   body('email')
     .isEmail()
@@ -37,7 +37,7 @@ const validateRegistration = [
   handleValidationErrors
 ];
 
-// User login validation
+
 const validateLogin = [
   body('email')
     .isEmail()
@@ -49,7 +49,7 @@ const validateLogin = [
   handleValidationErrors
 ];
 
-// Session ID validation for report generation
+
 const validateSessionId = [
   param('sessionId')
     .notEmpty()
@@ -59,7 +59,7 @@ const validateSessionId = [
   handleValidationErrors
 ];
 
-// Body validation for POST requests
+
 const validateReportRequest = [
   body('session_id')
     .notEmpty()
@@ -69,13 +69,7 @@ const validateReportRequest = [
   handleValidationErrors
 ];
 
-// module.exports = {
-//   validateRegistration,
-//   validateLogin,
-//   validateSessionId,
-//   validateReportRequest,
-//   handleValidationErrors
-// };
+
 
 module.exports ={
     validateLogin,

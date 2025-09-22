@@ -1,4 +1,4 @@
-// backend/data/data.js
+
 const assessmentData = [
   {
     "session_id": "session_001",

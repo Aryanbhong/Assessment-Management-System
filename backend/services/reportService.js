@@ -11,7 +11,6 @@ class ReportService {
     this.reportsPath = path.join(__dirname, '../generated-reports');
   }
 
-  // Get assessment data by session ID
   getAssessmentData(sessionId) {
     const data = assessmentData.find(item => item.session_id === sessionId);
     if (!data) {
@@ -20,7 +19,6 @@ class ReportService {
     return data;
   }
 
-  // Get configuration for assessment type
   getAssessmentConfig(assessmentId) {
     const config = assessmentConfigurations[assessmentId];
     if (!config) {
@@ -29,7 +27,7 @@ class ReportService {
     return config;
   }
 
-  // Process data according to configuration
+
   processAssessmentData(data, config) {
     const processedSections = config.sections.map(section => {
       const processedFields = section.fields.map(field => {
@@ -64,63 +62,7 @@ class ReportService {
     };
   }
 
-//   // Load and render HTML template
-//   renderTemplate(templateName, data) {
-//     try {
-//       const templatePath = path.join(this.templatesPath, `${templateName}.html`);
-      
-//       if (!fs.existsSync(templatePath)) {
-//         throw new Error(`Template not found: ${templatePath}`);
-//       }
 
-//       let template = fs.readFileSync(templatePath, 'utf8');
-//       console.log('--- Template HTML Preview ---');
-//     console.log(template.substring(0, 500)); // show first 500 chars
-//     console.log('--- End of Template Preview ---');
-//       // Simple template rendering (replace {{variable}} with actual values)
-//       template = template.replace(/\{\{assessmentName\}\}/g, data.assessmentName || '');
-//       template = template.replace(/\{\{sessionId\}\}/g, data.metadata.sessionId || '');
-//       template = template.replace(/\{\{generatedAt\}\}/g, new Date(data.metadata.generatedAt).toLocaleString());
-      
-//       // Render sections dynamically
-//       let sectionsHtml = '';
-//       data.sections.forEach(section => {
-//         sectionsHtml += `
-//           <div class="section">
-//             <h2 class="section-title">${section.title}</h2>
-//             <div class="fields-grid">
-//         `;
-        
-//         section.fields.forEach(field => {
-//           const classificationClass = field.classification ? field.classification.level : 'unknown';
-//           const classificationColor = field.classification ? field.classification.color : '#6b7280';
-          
-//           sectionsHtml += `
-//             <div class="field-card">
-//               <div class="field-label">${field.label}</div>
-//               <div class="field-value" style="color: ${classificationColor}">
-//                 ${field.displayValue}
-//               </div>
-//               <div class="field-classification ${classificationClass}">
-//                 ${field.classification ? field.classification.level : 'N/A'}
-//               </div>
-//             </div>
-//           `;
-//         });
-        
-//         sectionsHtml += `
-//             </div>
-//           </div>
-//         `;
-//       });
-      
-//       template = template.replace(/\{\{sections\}\}/g, sectionsHtml);
-      
-//       return template;
-//     } catch (error) {
-//       throw new Error(`Template rendering failed: ${error.message}`);
-//     }
-//   }
 
 renderTemplate(templateName, data) {
   try {
@@ -133,15 +75,15 @@ renderTemplate(templateName, data) {
 
     let template = fs.readFileSync(templatePath, 'utf8');
     console.log('--- Template HTML Preview ---');
-    console.log(template.substring(0, 500)); // show first 500 chars
+    console.log(template.substring(0, 500)); 
     console.log('--- End of Template Preview ---');
 
-    // Simple template rendering (replace {{variable}} with actual values)
+   
     template = template.replace(/\{\{assessmentName\}\}/g, data.assessmentName || '');
     template = template.replace(/\{\{sessionId\}\}/g, data.metadata.sessionId || '');
     template = template.replace(/\{\{generatedAt\}\}/g, new Date(data.metadata.generatedAt).toLocaleString());
 
-    // Render sections dynamically
+ 
     let sectionsHtml = '';
     data.sections.forEach(section => {
       sectionsHtml += `
@@ -181,29 +123,26 @@ renderTemplate(templateName, data) {
   }
 }
 
-  // Generate PDF report
+
   async generateReport(sessionId) {
     try {
-      // Get assessment data
+   
       const assessmentData = this.getAssessmentData(sessionId);
       
-      // Get configuration
+      
       const config = this.getAssessmentConfig(assessmentData.assessment_id);
       
-      // Process data according to configuration
+      
       const processedData = this.processAssessmentData(assessmentData, config);
       
-      // Render HTML template
+  
       const htmlContent = this.renderTemplate(config.template, processedData);
-      console.log('--- HTML Content Preview ---');
-console.log(htmlContent.slice(0, 1000)); // prints first 1000 chars
-console.log('--- End of Preview ---');
-      // Generate PDF filename
+      
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
       const filename = `${assessmentData.assessment_id}_${sessionId}_${timestamp}.pdf`;
       const outputPath = path.join(this.reportsPath, filename);
       
-      // Generate PDF
+    
       const pdfGenerator = getPDFGenerator();
       const result = await pdfGenerator.generateAndSavePDF(htmlContent, outputPath);
       
@@ -224,7 +163,7 @@ console.log('--- End of Preview ---');
     
   }
 
-  // Get list of available sessions for testing
+  
   getAvailableSessions() {
     return assessmentData.map(item => ({
       sessionId: item.session_id,
@@ -234,7 +173,6 @@ console.log('--- End of Preview ---');
     }));
   }
 
-  // Get report file info
   getReportInfo(filename) {
     const filePath = path.join(this.reportsPath, filename);
     
@@ -253,7 +191,6 @@ console.log('--- End of Preview ---');
     };
   }
 
-  // List all generated reports
   listGeneratedReports() {
     if (!fs.existsSync(this.reportsPath)) {
       return [];
@@ -277,7 +214,7 @@ console.log('--- End of Preview ---');
     return files;
   }
 
-  // Delete a report file
+
   deleteReport(filename) {
     const filePath = path.join(this.reportsPath, filename);
     
@@ -294,7 +231,7 @@ console.log('--- End of Preview ---');
   }
 }
 
-// Export singleton instance
+
 let reportServiceInstance = null;
 
 const getReportService = () => {
@@ -304,10 +241,7 @@ const getReportService = () => {
   return reportServiceInstance;
 };
 
-// module.exports = {
-//   ReportService,
-//   getReportService
-// };
+
 
 module.exports ={
     ReportService,

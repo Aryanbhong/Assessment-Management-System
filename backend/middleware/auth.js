@@ -1,4 +1,4 @@
-// backend/middleware/auth.js
+
 const jwt = require('jsonwebtoken');
 const { findUserById } = require('../data/users');
 
@@ -23,7 +23,7 @@ const authenticateToken = (req, res, next) => {
       });
     }
 
-    // Verify user still exists
+
     const existingUser = findUserById(user.id);
     if (!existingUser) {
       return res.status(403).json({ 
@@ -49,11 +49,6 @@ const generateToken = (user) => {
   });
 };
 
-// module.exports = {
-//   authenticateToken,
-//   generateToken,
-//   JWT_SECRET
-// };
 
 module.exports={
     authenticateToken,
